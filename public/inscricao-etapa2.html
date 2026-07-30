@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscrição — Etapa 2 | Programa EAFI</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>Prefeitura Municipal de Taubaté</span>
+    <span>Secretaria de Esportes</span>
+  </div>
+</div>
+
+<header class="site-header" style="padding: 26px 0;">
+  <div class="container">
+    <h1 style="font-size: 1.8rem;">Inscrição EAFI 2026/2027</h1>
+  </div>
+</header>
+
+<main>
+  <section class="page">
+    <div class="container">
+
+      <div class="steps">
+        <div class="step concluido"><span class="num">✓</span> Dados do candidato</div>
+        <div class="step ativo"><span class="num">2</span> Modalidade</div>
+        <div class="step"><span class="num">3</span> Confirmação</div>
+      </div>
+
+      <div class="erro-msg" id="erro-geral"></div>
+
+      <div class="card">
+        <h2>Escolha a modalidade</h2>
+        <p class="dica">As modalidades destacadas em verde são elegíveis para <b id="nome-candidato">o candidato</b>, de acordo com a idade e o sexo informados. As demais estão desabilitadas.</p>
+        <div class="modalidades-lista" id="lista-modalidades"></div>
+      </div>
+
+      <div class="card" id="card-resumo-prova" style="display:none;">
+        <h2>Informações da prova</h2>
+        <div class="resumo-prova visivel" id="resumo-prova"></div>
+      </div>
+
+      <div class="card" id="card-responsavel-prova" style="display:none;">
+        <h2>Responsável no dia da prova</h2>
+        <div class="form-grupo">
+          <label for="select-responsavel-prova">Quem vai acompanhar o candidato?</label>
+          <select id="select-responsavel-prova" required></select>
+        </div>
+      </div>
+
+      <div class="form-acoes">
+        <a href="/inscricao-etapa1.html" class="btn btn-secondary">← Voltar</a>
+        <button type="button" class="btn btn-primary" id="btn-confirmar" disabled>Confirmar inscrição</button>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Prefeitura Municipal de Taubaté — Secretaria de Esportes</span>
+    <div class="rodape-links">
+      <a href="/consulta.html">Consultar minha inscrição</a>
+      <a href="/admin.html">Área administrativa</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/etapa2.js"></script>
+</body>
+</html>

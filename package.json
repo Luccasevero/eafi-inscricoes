@@ -1,0 +1,23 @@
+{
+  "name": "eafi-inscricoes",
+  "version": "1.0.0",
+  "description": "Sistema de inscricao - Programa EAFI, Prefeitura de Taubate - Seletiva 2026/2027",
+  "main": "src/app.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:seed": "node prisma/seed.js",
+    "prisma:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.20.0"
+  }
+}

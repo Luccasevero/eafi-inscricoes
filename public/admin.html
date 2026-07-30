@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área administrativa | Programa EAFI</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>Prefeitura Municipal de Taubaté</span>
+    <span>Secretaria de Esportes</span>
+  </div>
+</div>
+
+<header class="site-header" style="padding: 26px 0;">
+  <div class="container">
+    <h1 style="font-size: 1.8rem;">Área administrativa — EAFI</h1>
+  </div>
+</header>
+
+<main>
+  <section class="page">
+    <div class="container">
+
+      <!-- Tela de login -->
+      <div class="card login-box" id="tela-login">
+        <h2>Acesso restrito</h2>
+        <p class="dica">Informe usuário e senha da área administrativa.</p>
+        <div class="erro-msg" id="erro-login"></div>
+        <div class="form-grupo">
+          <label for="usuario">Usuário</label>
+          <input type="text" id="usuario" autocomplete="username">
+        </div>
+        <div class="form-grupo">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" autocomplete="current-password">
+        </div>
+        <button type="button" class="btn btn-primary btn-block" id="btn-entrar">Ver inscritos</button>
+      </div>
+
+      <!-- Painel (visível após login) -->
+      <div id="painel" style="display:none;">
+
+        <div class="admin-toolbar">
+          <h2 style="margin:0;">Inscrições recebidas (<span id="total-inscritos">0</span>)</h2>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" id="btn-exportar">Exportar CSV</button>
+            <button type="button" class="btn btn-secondary" id="btn-sair">Sair</button>
+          </div>
+        </div>
+
+        <div class="card" id="card-resultado" style="padding:18px 20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+            <div>
+              <h2 style="margin-bottom:4px;">Resultado da seletiva</h2>
+              <p class="dica" id="status-publicacao" style="margin:0;">Carregando...</p>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-publicar">Publicar resultado da seletiva</button>
+          </div>
+        </div>
+
+        <div class="contagens" id="contagens"></div>
+
+        <div class="tabela-scroll">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Código</th><th>Nome</th><th>Nascimento</th><th>Sexo</th><th>Modalidade</th>
+                <th>Responsável na prova</th><th>Telefone(s)</th><th>E-mail</th><th>Escola</th>
+                <th>Deficiência</th><th>Medicamento</th><th>Convênio</th><th>Data da prova</th><th>Resultado</th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+          </table>
+        </div>
+
+        <div class="vazio" id="tabela-vazia" style="display:none;">Nenhuma inscrição encontrada.</div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Prefeitura Municipal de Taubaté — Secretaria de Esportes</span>
+    <div class="rodape-links">
+      <a href="/">Início</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

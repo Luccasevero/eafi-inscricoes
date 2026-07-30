@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscrição — Etapa 1 | Programa EAFI</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>Prefeitura Municipal de Taubaté</span>
+    <span>Secretaria de Esportes</span>
+  </div>
+</div>
+
+<header class="site-header" style="padding: 26px 0;">
+  <div class="container">
+    <h1 style="font-size: 1.8rem;">Inscrição EAFI 2026/2027</h1>
+  </div>
+</header>
+
+<main>
+  <section class="page">
+    <div class="container">
+
+      <div class="steps">
+        <div class="step ativo"><span class="num">1</span> Dados do candidato</div>
+        <div class="step"><span class="num">2</span> Modalidade</div>
+        <div class="step"><span class="num">3</span> Confirmação</div>
+      </div>
+
+      <div class="erro-msg" id="erro-geral"></div>
+
+      <form class="card" id="form-etapa1" novalidate>
+
+        <h2>Dados do candidato</h2>
+
+        <div class="form-grupo">
+          <label for="nomeCompleto">Nome completo</label>
+          <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+        </div>
+
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label for="dataNascimento">Data de nascimento</label>
+            <input type="date" id="dataNascimento" name="dataNascimento" required>
+          </div>
+          <div class="form-grupo">
+            <label>Sexo</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sexo" value="F" required> Feminino</label>
+              <label><input type="radio" name="sexo" value="M" required> Masculino</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-grupo">
+            <label for="escola">Escola</label>
+            <input type="text" id="escola" name="escola" required>
+          </div>
+        </div>
+
+        <div class="form-grupo">
+          <label for="anoEscolar">Ano escolar</label>
+          <input type="text" id="anoEscolar" name="anoEscolar" placeholder="Ex: 6º ano do Ensino Fundamental" required>
+        </div>
+
+        <h2 style="margin-top: 28px;">Endereço</h2>
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label for="rua">Rua</label>
+            <input type="text" id="rua" name="rua" required>
+          </div>
+          <div class="form-grupo">
+            <label for="numero">Número</label>
+            <input type="text" id="numero" name="numero" required>
+          </div>
+        </div>
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro" name="bairro" required>
+          </div>
+          <div class="form-grupo">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade" required value="Taubaté">
+          </div>
+        </div>
+        <div class="form-grupo">
+          <label for="complemento">Complemento <span class="opcional">(opcional)</span></label>
+          <input type="text" id="complemento" name="complemento">
+        </div>
+
+        <h2 style="margin-top: 28px;">Telefones de contato</h2>
+        <div id="lista-telefones"></div>
+        <button type="button" class="btn-adicionar" id="add-telefone">+ Adicionar telefone</button>
+
+        <h2 style="margin-top: 28px;">Responsáveis</h2>
+        <p class="dica">Adicione um ou mais responsáveis (ex: mãe e pai). Depois você vai escolher qual deles acompanha o candidato no dia da prova.</p>
+        <div id="lista-responsaveis"></div>
+        <button type="button" class="btn-adicionar" id="add-responsavel">+ Adicionar responsável</button>
+
+        <h2 style="margin-top: 28px;">Informações de saúde e esportivas</h2>
+
+        <fieldset class="form-grupo">
+          <label>Pratica algum esporte atualmente?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="praticaEsportes" value="sim"> Sim</label>
+            <label><input type="radio" name="praticaEsportes" value="nao" checked> Não</label>
+          </div>
+          <div class="campo-condicional" id="cond-praticaEsportes">
+            <label for="praticaEsportesDetalhe">Qual esporte e onde pratica?</label>
+            <textarea id="praticaEsportesDetalhe" name="praticaEsportesDetalhe"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-grupo">
+          <label>O candidato tem alguma deficiência?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="deficiencia" value="sim"> Sim</label>
+            <label><input type="radio" name="deficiencia" value="nao" checked> Não</label>
+          </div>
+          <div class="campo-condicional" id="cond-deficiencia">
+            <label for="deficienciaDetalhe">Descreva a deficiência</label>
+            <textarea id="deficienciaDetalhe" name="deficienciaDetalhe"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-grupo">
+          <label>Toma algum medicamento de uso contínuo?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="medicamento" value="sim"> Sim</label>
+            <label><input type="radio" name="medicamento" value="nao" checked> Não</label>
+          </div>
+          <div class="campo-condicional" id="cond-medicamento">
+            <label for="medicamentoDetalhe">Qual medicamento?</label>
+            <textarea id="medicamentoDetalhe" name="medicamentoDetalhe"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-grupo">
+          <label>Possui convênio médico?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="convenio" value="sim"> Sim</label>
+            <label><input type="radio" name="convenio" value="nao" checked> Não</label>
+          </div>
+          <div class="campo-condicional" id="cond-convenio">
+            <label for="convenioNome">Nome do convênio</label>
+            <input type="text" id="convenioNome" name="convenioNome">
+          </div>
+        </fieldset>
+
+        <fieldset class="form-grupo">
+          <label>O candidato está autorizado a praticar esportes?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="autorizado" value="sim" required> Sim</label>
+            <label><input type="radio" name="autorizado" value="nao" required> Não</label>
+          </div>
+        </fieldset>
+
+        <div class="form-acoes">
+          <a href="/" class="btn btn-secondary">Voltar</a>
+          <button type="submit" class="btn btn-primary">Continuar para modalidade →</button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Prefeitura Municipal de Taubaté — Secretaria de Esportes</span>
+    <div class="rodape-links">
+      <a href="/consulta.html">Consultar minha inscrição</a>
+      <a href="/admin.html">Área administrativa</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/etapa1.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultar minha inscrição | Programa EAFI</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>Prefeitura Municipal de Taubaté</span>
+    <span>Secretaria de Esportes</span>
+  </div>
+</div>
+
+<header class="site-header" style="padding: 26px 0;">
+  <div class="container">
+    <h1 style="font-size: 1.8rem;">Consultar minha inscrição</h1>
+  </div>
+</header>
+
+<main>
+  <section class="page">
+    <div class="container">
+
+      <div class="erro-msg" id="erro-geral"></div>
+
+      <form class="card" id="form-consulta">
+        <p class="dica">Você pode consultar sua inscrição pelo <b>código de confirmação</b> (ex: EAFI-A1B2C3),
+        ou pelo <b>e-mail + data de nascimento</b> do candidato.</p>
+
+        <div class="form-grupo">
+          <label for="codigo">Código de confirmação <span class="opcional">(opcional se preencher e-mail e data abaixo)</span></label>
+          <input type="text" id="codigo" placeholder="EAFI-XXXXXX">
+        </div>
+
+        <p style="text-align:center; color: var(--texto-suave); margin: 4px 0;">— ou —</p>
+
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label for="email">E-mail do candidato</label>
+            <input type="email" id="email">
+          </div>
+          <div class="form-grupo">
+            <label for="dataNascimento">Data de nascimento do candidato</label>
+            <input type="date" id="dataNascimento">
+          </div>
+        </div>
+
+        <div class="form-acoes">
+          <a href="/" class="btn btn-secondary">Voltar ao início</a>
+          <button type="submit" class="btn btn-primary">Consultar</button>
+        </div>
+      </form>
+
+      <div id="resultado"></div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Prefeitura Municipal de Taubaté — Secretaria de Esportes</span>
+    <div class="rodape-links">
+      <a href="/inscricao-etapa1.html">Fazer inscrição</a>
+      <a href="/admin.html">Área administrativa</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/resumo.js"></script>
+<script src="/js/consulta.js"></script>
+</body>
+</html>

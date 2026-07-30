@@ -1,0 +1,99 @@
+// Schema Prisma - Sistema de Inscricao EAFI 2026/2027
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // usada em runtime (conexão via pooler do Neon)
+  directUrl = env("DIRECT_URL")   // usada só pelo Prisma para migrations (conexão direta)
+}
+
+// Sexo permitido para uma modalidade: "F", "M" ou "AMBOS"
+model Modalidade {
+  id             Int         @id @default(autoincrement())
+  nome           String
+  sexo           String // "F" | "M" | "AMBOS"
+  anosPermitidos Int[]
+  inscricoes     Inscricao[]
+
+  @@unique([nome, sexo])
+}
+
+// Responsavel(is) do candidato, cadastrados na Etapa 1.
+// Um mesmo registro pode ser referenciado como "responsavel no dia da prova"
+// pela inscricao a qual pertence.
+model Responsavel {
+  id          Int    @id @default(autoincrement())
+  nome        String
+  telefone    String?
+  tipo        String // ex: "Mae", "Pai", "Responsavel legal"
+  inscricaoId Int
+  inscricao   Inscricao @relation("ResponsaveisDaInscricao", fields: [inscricaoId], references: [id], onDelete: Cascade)
+
+  // Inscricoes que escolheram este responsavel como "responsavel no dia da prova"
+  inscricoesComoResponsavelProva Inscricao[] @relation("ResponsavelProva")
+}
+
+model Inscricao {
+  id                Int      @id @default(autoincrement())
+  codigoConfirmacao String   @unique
+
+  // Etapa 1 - dados do candidato e da familia
+  nomeCompleto      String
+  dataNascimento    DateTime
+  sexo              String // "F" | "M"
+  email             String
+  escola            String
+  anoEscolar        String
+
+  rua               String
+  numero            String
+  bairro            String
+  cidade            String
+  complemento       String?
+
+  telefones         String[]
+
+  praticaEsportes        Boolean @default(false)
+  praticaEsportesDetalhe String?
+
+  deficiencia        Boolean @default(false)
+  deficienciaDetalhe String?
+
+  medicamento        Boolean @default(false)
+  medicamentoDetalhe String?
+
+  convenio     Boolean @default(false)
+  convenioNome String?
+
+  autorizado Boolean @default(false)
+
+  // Etapa 2 - modalidade e responsavel no dia da prova
+  modalidadeId Int
+  modalidade   Modalidade @relation(fields: [modalidadeId], references: [id])
+
+  responsavelProvaId Int?
+  responsavelProva   Responsavel? @relation("ResponsavelProva", fields: [responsavelProvaId], references: [id])
+
+  responsaveis Responsavel[] @relation("ResponsaveisDaInscricao")
+
+  // Resultado da seletiva: "pendente" | "aprovado" | "reprovado"
+  // So fica visivel na consulta publica depois que ResultadoConfig.publicado = true
+  status String @default("pendente")
+
+  createdAt DateTime @default(now())
+
+  // Evita inscricao duplicada por nome + data de nascimento.
+  // O e-mail duplicado tambem e checado explicitamente no service.
+  @@unique([nomeCompleto, dataNascimento])
+}
+
+// Linha unica (singleton) que controla se o resultado da seletiva
+// ja foi publicado para consulta publica.
+model ResultadoConfig {
+  id          Int       @id @default(autoincrement())
+  publicado   Boolean   @default(false)
+  publicadoEm DateTime?
+}
