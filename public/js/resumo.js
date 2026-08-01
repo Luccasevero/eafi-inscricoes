@@ -32,11 +32,12 @@ function renderResumo(dados, container) {
   }
 
   container.innerHTML = `
+    <div class="comprovante-print">
     <div class="card">
       <div class="comprovante-cabecalho">
         <div class="check-circulo">✓</div>
         <h2>Inscrição confirmada!</h2>
-        <p>Guarde o código abaixo — ele será necessário para consultar sua inscrição.</p>
+        <p class="no-print">Guarde o código abaixo — ele será necessário para consultar sua inscrição.</p>
         <div class="comprovante-codigo">${dados.codigoConfirmacao}</div>
       </div>
 
@@ -47,7 +48,7 @@ function renderResumo(dados, container) {
         <tr><td class="rotulo">Sexo</td><td class="valor">${dados.sexo === 'F' ? 'Feminino' : 'Masculino'}</td></tr>
         <tr><td class="rotulo">E-mail</td><td class="valor">${dados.email}</td></tr>
         <tr><td class="rotulo">Escola</td><td class="valor">${dados.escola} — ${dados.anoEscolar}</td></tr>
-        <tr><td class="rotulo">Endereço</td><td class="valor">${dados.endereco.rua}, ${dados.endereco.numero} — ${dados.endereco.bairro}, ${dados.endereco.cidade}${dados.endereco.complemento ? ' — ' + dados.endereco.complemento : ''}</td></tr>
+        <tr><td class="rotulo">Endereço residencial</td><td class="valor">${dados.endereco.rua}, ${dados.endereco.numero} — ${dados.endereco.bairro}, ${dados.endereco.cidade}${dados.endereco.complemento ? ' — ' + dados.endereco.complemento : ''}</td></tr>
         <tr><td class="rotulo">Telefone(s)</td><td class="valor">${dados.telefones.join(', ')}</td></tr>
       </table>
 
@@ -59,24 +60,27 @@ function renderResumo(dados, container) {
       <div class="secao-titulo">Modalidade e prova</div>
       <table class="tabela-resumo">
         <tr><td class="rotulo">Modalidade escolhida</td><td class="valor">${dados.modalidade.nome}</td></tr>
-        <tr><td class="rotulo">Responsável no dia da prova</td><td class="valor">${dados.responsavelProva ? `${dados.responsavelProva.nome} (${dados.responsavelProva.tipo})` : '-'}</td></tr>
+        <tr class="no-print"><td class="rotulo">Responsável no dia da prova</td><td class="valor">${dados.responsavelProva ? `${dados.responsavelProva.nome} (${dados.responsavelProva.tipo})` : '-'}</td></tr>
         <tr><td class="rotulo">Data da prova</td><td class="valor">${dados.prova.data}</td></tr>
-        <tr><td class="rotulo">Horário</td><td class="valor">${dados.prova.horario}</td></tr>
+        <tr><td class="rotulo">Horário de entrada</td><td class="valor">${dados.prova.horario}</td></tr>
         <tr><td class="rotulo">Local</td><td class="valor">${dados.prova.local}</td></tr>
         <tr><td class="rotulo">Divulgação dos aprovados</td><td class="valor">${dados.prova.dataDivulgacao}</td></tr>
       </table>
 
+      <div class="no-print">
       ${blocoResultado()}
+      </div>
 
       <div class="secao-titulo">Responsáveis cadastrados</div>
       <table class="tabela-resumo">
         ${dados.responsaveis.map((r) => `<tr><td class="rotulo">${r.tipo}</td><td class="valor">${r.nome}${r.telefone ? ' — ' + r.telefone : ''}</td></tr>`).join('')}
       </table>
 
-      <div class="form-acoes">
+      <div class="form-acoes no-print">
         <a href="/" class="btn btn-secondary">Voltar ao início</a>
         <button type="button" class="btn btn-primary" onclick="window.print()">Imprimir comprovante</button>
       </div>
+    </div>
     </div>
   `;
 }

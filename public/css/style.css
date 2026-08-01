@@ -458,3 +458,27 @@ table.tabela-admin tr:hover td { background: #F5F8FA; }
   .steps { gap: 6px; }
   .step { font-size: 0.78rem; padding: 6px 10px; }
 }
+
+/* ---------- Impressão do comprovante ---------- */
+@media print {
+  .topbar, .site-header, .site-footer, .steps, .erro-msg, .no-print {
+    display: none !important;
+  }
+  body { background: #fff; font-size: 11px; }
+  .container { max-width: 100%; padding: 0; margin: 0; }
+  section.page { padding: 0; }
+  .comprovante-print .card {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  .comprovante-cabecalho { margin-bottom: 10px; }
+  .check-circulo { width: 40px; height: 40px; font-size: 1.2rem; margin-bottom: 6px; }
+  .comprovante-cabecalho h2 { font-size: 1.2rem; margin-bottom: 4px; }
+  .comprovante-codigo { font-size: 1.1rem; padding: 6px 16px; margin-top: 4px; }
+  .secao-titulo { font-size: 0.82rem; margin: 10px 0 4px; padding-bottom: 3px; }
+  .tabela-resumo td { padding: 4px 4px; font-size: 0.78rem; }
+  .tabela-resumo td.rotulo { width: 38%; }
+  @page { margin: 12mm; }
+}
