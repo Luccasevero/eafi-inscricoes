@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const prisma = require('../config/prisma');
 const { isElegivel } = require('./elegibilidade.service');
 const resultadoService = require('./resultado.service');
-const { dataProvaPorSexo, LOCAL_PROVA, HORARIO_PROVA, DATA_DIVULGACAO } = require('../config/constants');
+const { dataProvaPorSexo, horarioProvaPorSexo, LOCAL_PROVA, DATA_DIVULGACAO } = require('../config/constants');
 
 class ValidationError extends Error {
   constructor(message, field) {
@@ -200,7 +200,7 @@ function montarResumo(inscricao, resultadoPublicado) {
       : null,
     prova: {
       data: dataProvaPorSexo(inscricao.sexo),
-      horario: HORARIO_PROVA,
+      horario: horarioProvaPorSexo(inscricao.sexo),
       local: LOCAL_PROVA,
       dataDivulgacao: DATA_DIVULGACAO
     },

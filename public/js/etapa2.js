@@ -21,7 +21,7 @@
   let modalidadeSelecionadaId = null;
 
   const DATA_PROVA = { F: '19/09/2026', M: '20/09/2026' };
-  const HORARIO_PROVA = '8h às 8:30h';
+  const HORARIO_PROVA = { F: '8h às 8:30h', M: '13h às 13:30h' };
   const LOCAL_PROVA = 'SEDES - EMIEF Prof.ª Anna dos Reis Signorini, Av. Amador Bueno da Veiga, 220 - Jardim Jaraguá';
   const DATA_DIVULGACAO = '15/10/2026';
 
@@ -76,7 +76,7 @@
 
     resumoProva.innerHTML = `
       <div class="item"><span>Data da prova</span><b>${DATA_PROVA[etapa1.sexo]}</b></div>
-      <div class="item"><span>Horário de entrada</span><b>${HORARIO_PROVA}</b></div>
+      <div class="item"><span>Horário de entrada</span><b>${HORARIO_PROVA[etapa1.sexo]}</b></div>
       <div class="item"><span>Local</span><b>${LOCAL_PROVA}</b></div>
       <div class="item"><span>Divulgação dos aprovados</span><b>${DATA_DIVULGACAO}</b></div>
     `;
