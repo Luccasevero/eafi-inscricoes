@@ -12,6 +12,8 @@
   let credenciais = sessionStorage.getItem('eafi_admin_auth'); // "Basic base64(user:pass)"
   let modalidadeFiltro = '';
   let resultadoPublicado = false;
+  let inscricoesAtuais = [];
+  let modalidadesAtuais = [];
 
   const cardResultado = document.getElementById('card-resultado');
   const statusPublicacaoEl = document.getElementById('status-publicacao');
@@ -87,6 +89,8 @@
     if (!resp.ok) return false;
 
     const dados = await resp.json();
+    inscricoesAtuais = dados.inscricoes;
+    modalidadesAtuais = dados.modalidades;
     renderTabela(dados.inscricoes);
     renderContagens(dados.modalidades);
     renderStatusPublicacao(dados.resultado);
@@ -176,6 +180,37 @@
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+  });
+
+  /** Monta a tabela simples (nome, data de nascimento, escola, responsável, assinatura) para impressão. */
+  function popularImpressao() {
+    const modalidadeSelecionada = modalidadesAtuais.find((m) => String(m.id) === String(modalidadeFiltro));
+    const tituloModalidade = modalidadeSelecionada
+      ? `${modalidadeSelecionada.nome} (${modalidadeSelecionada.sexo})`
+      : 'Todas as modalidades';
+
+    document.getElementById('impressao-titulo').textContent = `Lista de inscritos — ${tituloModalidade}`;
+    document.getElementById('impressao-meta').textContent =
+      `${inscricoesAtuais.length} inscrito(s) — impresso em ${new Date().toLocaleString('pt-BR')}`;
+
+    const corpo = document.getElementById('corpo-impressao');
+    const inscricoesOrdenadas = [...inscricoesAtuais].sort((a, b) =>
+      a.nomeCompleto.localeCompare(b.nomeCompleto, 'pt-BR')
+    );
+    corpo.innerHTML = inscricoesOrdenadas.map((i) => `
+      <tr>
+        <td>${i.nomeCompleto}</td>
+        <td>${new Date(i.dataNascimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</td>
+        <td>${i.escola}</td>
+        <td>${i.responsavelProva}</td>
+        <td class="celula-assinatura"></td>
+      </tr>
+    `).join('');
+  }
+
+  document.getElementById('btn-imprimir-lista').addEventListener('click', () => {
+    popularImpressao();
+    window.print();
   });
 
   // Se já tiver credenciais salvas nesta sessão, tenta entrar direto.

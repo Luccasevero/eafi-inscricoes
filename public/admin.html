@@ -44,15 +44,16 @@
       <!-- Painel (visível após login) -->
       <div id="painel" style="display:none;">
 
-        <div class="admin-toolbar">
+        <div class="admin-toolbar no-print">
           <h2 style="margin:0;">Inscrições recebidas (<span id="total-inscritos">0</span>)</h2>
           <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" id="btn-imprimir-lista">Imprimir lista</button>
             <button type="button" class="btn btn-secondary" id="btn-exportar">Exportar CSV</button>
             <button type="button" class="btn btn-secondary" id="btn-sair">Sair</button>
           </div>
         </div>
 
-        <div class="card" id="card-resultado" style="padding:18px 20px;">
+        <div class="card no-print" id="card-resultado" style="padding:18px 20px;">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
             <div>
               <h2 style="margin-bottom:4px;">Resultado da seletiva</h2>
@@ -62,9 +63,10 @@
           </div>
         </div>
 
-        <div class="contagens" id="contagens"></div>
+        <p class="dica no-print">Clique numa modalidade abaixo para filtrar a lista e imprimir só dela.</p>
+        <div class="contagens no-print" id="contagens"></div>
 
-        <div class="tabela-scroll">
+        <div class="tabela-scroll no-print">
           <table class="tabela-admin">
             <thead>
               <tr>
@@ -77,16 +79,29 @@
           </table>
         </div>
 
-        <div class="vazio" id="tabela-vazia" style="display:none;">Nenhuma inscrição encontrada.</div>
+        <div class="vazio no-print" id="tabela-vazia" style="display:none;">Nenhuma inscrição encontrada.</div>
+
+        <!-- Conteúdo exclusivo para impressão: lista simples para os pais assinarem -->
+        <div id="area-impressao" class="only-print">
+          <h2 id="impressao-titulo">Lista de inscritos</h2>
+          <p class="impressao-meta" id="impressao-meta"></p>
+          <table class="tabela-impressao">
+            <thead>
+              <tr><th>Nome</th><th>Data de Nascimento</th><th>Escola</th><th>Responsável</th><th>Assinatura</th></tr>
+            </thead>
+            <tbody id="corpo-impressao"></tbody>
+          </table>
+        </div>
+
       </div>
 
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer no-print">
   <div class="container">
-    <span>© 2026 Prefeitura Municipal de Taubaté — Secretarias de Esportes e Educação.</span>
+    <span>© 2026 Prefeitura Municipal de Taubaté — Secretarias de Esportes e Educação</span>
     <div class="rodape-links">
       <a href="/">Início</a>
     </div>

@@ -482,3 +482,31 @@ table.tabela-admin tr:hover td { background: #F5F8FA; }
   .tabela-resumo td.rotulo { width: 38%; }
   @page { margin: 12mm; }
 }
+
+/* ---------- Lista de impressão do admin (por modalidade, com assinatura) ---------- */
+.only-print { display: none; }
+
+#area-impressao h2 { margin-bottom: 4px; }
+#area-impressao .impressao-meta { font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 14px; }
+
+table.tabela-impressao {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.tabela-impressao th,
+table.tabela-impressao td {
+  border: 1px solid #333;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  text-align: left;
+}
+table.tabela-impressao th { background: #eee; }
+table.tabela-impressao td.celula-assinatura { min-width: 160px; }
+
+@media print {
+  .only-print { display: block !important; }
+  table.tabela-impressao { font-size: 11px; }
+  table.tabela-impressao td.celula-assinatura { height: 34px; }
+  table.tabela-impressao thead { display: table-header-group; } /* repete o cabeçalho a cada página */
+  table.tabela-impressao tr { page-break-inside: avoid; }
+}
