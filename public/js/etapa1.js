@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  // Trave de seguranca: se alguem acessar esta pagina direto por um link salvo
+  // com as inscricoes ja encerradas, manda de volta pra home antes de comecar.
+  // (mantenha este valor igual ao INSCRICOES_ABERTAS de src/config/constants.js)
+  const INSCRICOES_ABERTAS = false;
+  if (!INSCRICOES_ABERTAS) {
+    window.location.href = '/';
+    return;
+  }
+
   const form = document.getElementById('form-etapa1');
   const erroGeral = document.getElementById('erro-geral');
 

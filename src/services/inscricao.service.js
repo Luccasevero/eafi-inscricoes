@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const prisma = require('../config/prisma');
 const { isElegivel } = require('./elegibilidade.service');
 const resultadoService = require('./resultado.service');
-const { dataProvaPorSexo, horarioProvaPorSexo, LOCAL_PROVA, DATA_DIVULGACAO } = require('../config/constants');
+const { dataProvaPorSexo, horarioProvaPorSexo, LOCAL_PROVA, DATA_DIVULGACAO, INSCRICOES_ABERTAS } = require('../config/constants');
 
 class ValidationError extends Error {
   constructor(message, field) {
@@ -40,6 +40,13 @@ async function checarDuplicidade({ email, nomeCompleto, dataNascimento }) {
 }
 
 async function criarInscricao(payload) {
+  if (!INSCRICOES_ABERTAS) {
+    throw new ValidationError(
+      'As inscrições para a seletiva EAFI 2026/2027 estão encerradas.',
+      'inscricoesFechadas'
+    );
+  }
+
   const {
     nomeCompleto, dataNascimento, sexo, email, escola, anoEscolar,
     rua, numero, bairro, cidade, complemento,

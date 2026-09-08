@@ -7,6 +7,9 @@ const DATA_PROVA_FEMININO = '19/09/2026';
 const DATA_PROVA_MASCULINO = '20/09/2026';
 const DATA_DIVULGACAO = '15/10/2026';
 
+// Trave geral: quando false, nenhuma nova inscricao e aceita (mesmo via API direta).
+const INSCRICOES_ABERTAS = false;
+
 /**
  * Retorna a data da prova (string dd/mm/aaaa) de acordo com o sexo do candidato.
  * @param {string} sexo "F" ou "M"
@@ -30,6 +33,7 @@ module.exports = {
   DATA_PROVA_FEMININO,
   DATA_PROVA_MASCULINO,
   DATA_DIVULGACAO,
+  INSCRICOES_ABERTAS,
   dataProvaPorSexo,
   horarioProvaPorSexo
 };
